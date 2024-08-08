@@ -1,60 +1,51 @@
 import * as esbuild from 'esbuild'
-import { exec } from 'child_process'
+import { exec as callback_exec } from 'child_process'
 import { chdir } from 'process'
 import { promises as fs } from 'fs'
+import util from 'util'
+const exec = util.promisify(callback_exec)
 
-// async function build() {
-//     console.log(await esbuild.build({
-//         entryPoints: ['./src/index.js'],
-//         bundle: true,
-//         outdir: './dist',
-//         minify: true,
-//         sourcemap: true,
-//         target: ['es2015'],
-//     }))
-// }
+
+let debug, serve;
+
+for (let arg of process.argv) {
+    switch (arg) {
+        case "--serve":
+            serve = true
+            break
+        case "--debug":
+            debug = true
+            break
+    }
+}
 
 let ctx = await esbuild.context({
     entryPoints: ['./src/index.js'],
     bundle: true,
     outdir: './dist',
-    sourcemap: true
+    sourcemap: !!debug,
+    define: {'window.DEBUG': "" + debug}
 })
 
-chdir('./src/mathquill')
-exec('make', (error, stdout, stderr) => {
-    if (error) {
-        console.error(`Error building mathquill: ${error.message}`)
-        return;
-    }
 
-    if (stderr) {
-        console.error(`Mathquill make stderr: ${stderr}`)
-        return;
-    }
+async function buildPrereqs() {
+    chdir('./src/mathquill')
+    await exec('make')
+    console.log('Mathquill done')
+    
+    chdir('../editor.js')
+    await exec('npm run build')
+    console.log('Editor.js done')
+    
+    chdir('../..')
+    await fs.copyFile('./src/mathquill/build/mathquill.js', './dist/mathquill.js')
+    console.log('Files copied')
+}
 
-    console.log(`Mathquill build stdout: ${stdout}`)
-})
+await buildPrereqs()
 
-chdir('../editor.js')
-exec('npm run build', (error, stdout, stderr) => {
-    if (error) {
-        console.error(`Error building editorjs: ${error.message}`)
-        return;
-    }
 
-    if (stderr) {
-        console.error(`Editorjs stderr: ${stderr}`)
-        return;
-    }
-
-    console.log(`Editorjs build stdout: ${stdout}`)
-})
-
-chdir('../..')
-await fs.copyFile('./src/mathquill/build/mathquill.js', './dist/mathquill.js')
-
-if (process.argv[2] == '--serve') {
+if (serve) {
     await ctx.watch()
 
     let { host, port } = await ctx.serve({

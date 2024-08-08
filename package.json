@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "node script/build.mjs",
-    "serve": "node script/build.mjs --serve"
+    "build": "node script/build.mjs --debug",
+    "serve": "node script/build.mjs --serve --debug",
+    "build-prod": "node script/build.mjs"
   },
   "author": "Christian Soltermann",
   "license": "ISC",

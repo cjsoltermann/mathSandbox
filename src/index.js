@@ -1,5 +1,7 @@
 import EditorJS from './editor.js/dist/editorjs.mjs';
-new EventSource('/esbuild').addEventListener('change', () => location.reload())
+
+if (window.DEBUG)
+    new EventSource('/esbuild').addEventListener('change', () => location.reload())
 
 class MathBlock {
     static MQ = MathQuill.getInterface(2)
