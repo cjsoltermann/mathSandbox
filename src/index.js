@@ -26,6 +26,12 @@ class MathBlock {
         this.mathFieldDiv.addEventListener('focusin', () => {
             window.secretStuff = true
         })
+        
+        this.wrapper.addEventListener('focusout', () => {
+            window.secretStuff = false
+        })
+
+        this.wrapper.setAttribute('data-mutation-free', 'true')
 
         this.mathField = MathBlock.MQ.MathField(this.mathFieldDiv, {
             spaceBehavesLikeTab: true,
