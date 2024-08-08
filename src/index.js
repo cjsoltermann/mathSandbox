@@ -41,7 +41,7 @@ class MathBlock {
             supSubsRequireOperand: true,
             charsThatBreakOutOfSupSub: '=<>',
             autoSubscriptNumerals: true,
-            autoCommands: 'alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau upsilon phi chi psi omega sqrt sum prod int',
+            autoCommands: 'alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau upsilon phi chi psi omega sqrt infty aleph sum prod int',
             autoOperatorNames: 'sin cos tan log ln cosh sinh tanh',
             maxDepth: 10,
             // substituteTextarea: function() {
