@@ -1,0 +1,16 @@
+{
+  "name": "8-6-24",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "node script/build.mjs",
+    "serve": "node script/build.mjs --serve"
+  },
+  "author": "Christian Soltermann",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "esbuild": "^0.23.0",
+    "jquery": "^3.7.1"
+  }
+}

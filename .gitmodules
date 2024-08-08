@@ -1,0 +1,6 @@
+[submodule "src/editor.js"]
+	path = src/editor.js
+	url = https://github.com/cjsoltermann/editor.js.git
+[submodule "src/mathquill"]
+	path = src/mathquill
+	url = https://github.com/desmosinc/mathquill.git
