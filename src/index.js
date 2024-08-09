@@ -34,7 +34,8 @@ class MathBlock {
         this.wrapper.setAttribute('data-mutation-free', 'true')
 
         this.mathField = MathBlock.MQ.MathField(this.mathFieldDiv, {
-            spaceBehavesLikeTab: true,
+            // spaceBehavesLikeTab: true,
+            spaceBehavesLikeArrows: true,
             leftRightIntoCmdGoes: 'up',
             restrictMismatchedBrackets: true,
             sumStartsWithNEquals: true,
