@@ -1,0 +1,12 @@
+.cdx-marker {
+    background: rgba(245, 235, 111, 0.29);
+    padding: 3px 0;
+}
+
+.mq-math-mode path {
+    stroke: none
+}
+
+.mq-math-mode sup.mq-nthroot {
+    vertical-align: 0.6em;
+}

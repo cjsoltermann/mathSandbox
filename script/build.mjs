@@ -22,7 +22,7 @@ for (let arg of process.argv) {
 let ctx = await esbuild.context({
     entryPoints: ['./src/index.js'],
     bundle: true,
-    outdir: './dist',
+    outdir: './dist/script',
     sourcemap: !!debug,
     define: {'window.DEBUG': "" + debug}
 })
@@ -38,7 +38,7 @@ async function buildPrereqs() {
     console.log('Editor.js done')
     
     chdir('../..')
-    await fs.copyFile('./src/mathquill/build/mathquill.js', './dist/mathquill.js')
+    await fs.copyFile('./src/mathquill/build/mathquill.js', './dist/script/mathquill.js')
     console.log('Files copied')
 }
 
