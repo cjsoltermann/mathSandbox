@@ -30,7 +30,7 @@ let ctx = await esbuild.context({
 
 async function buildPrereqs() {
     chdir('./src/mathquill')
-    await exec('make')
+    await exec('make dev')
     console.log('Mathquill done')
     
     chdir('../editor.js')
@@ -38,11 +38,21 @@ async function buildPrereqs() {
     console.log('Editor.js done')
     
     chdir('../..')
-    await fs.copyFile('./src/mathquill/build/mathquill.js', './dist/script/mathquill.js')
+    await fs.copyFile('./src/mathquill/build/mathquill.js', './src/mathquill.js')
     console.log('Files copied')
 }
 
 await buildPrereqs()
+esbuild.build({
+    entryPoints: ['./src/mathquill.js'],
+    outdir: './dist/script',
+    globalName: 'Mathquill'
+})
+esbuild.build({
+    entryPoints: ['./src/jquery.js'],
+    outdir: 'dist/script',
+    globalName: '$'
+})
 
 
 if (serve) {
